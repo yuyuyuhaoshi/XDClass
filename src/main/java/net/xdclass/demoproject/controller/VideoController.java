@@ -1,6 +1,7 @@
 package net.xdclass.demoproject.controller;
 
 import net.xdclass.demoproject.service.VideoService;
+import net.xdclass.demoproject.utils.JsonData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +26,7 @@ public class VideoController {
 
     @GetMapping("list")
     public Object list(){
-        return videoService.videoList();
+        return JsonData.buildSuccess(videoService.videoList()) ;
 
     }
 
