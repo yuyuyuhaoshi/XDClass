@@ -1,17 +1,16 @@
 package net.xdclass.demoproject.domain;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class User implements Serializable {
     private int id;
     private String username;
-    private String pwd;
+    private String password;
 
-    public User(int id, String username, String pwd) {
+    public User(int id, String username, String password) {
         this.id = id;
         this.username = username;
-        this.pwd = pwd;
+        this.password = password;
     }
 
     public int getId() {
@@ -30,11 +29,20 @@ public class User implements Serializable {
         this.username = username;
     }
 
-    public String getPwd() {
-        return pwd;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPwd(String pwd) {
-        this.pwd = pwd;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }
