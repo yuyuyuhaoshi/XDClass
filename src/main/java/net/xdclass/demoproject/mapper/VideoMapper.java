@@ -11,6 +11,7 @@ import java.util.Map;
 @Repository
 public class VideoMapper {
     private static Map<Integer, Video> videoMap = new HashMap<>();
+
     static {
         videoMap.put(1, new Video(1, "Java"));
         videoMap.put(2, new Video(2, "Golang"));

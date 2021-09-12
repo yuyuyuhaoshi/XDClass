@@ -45,10 +45,11 @@ public class JsonData {
         this.code = code;
     }
 
-    public  static JsonData buildSuccess(Object data) {
-        return  new JsonData(0,  "", data);
+    public static JsonData buildSuccess(Object data) {
+        return new JsonData(0, "", data);
     }
-    public static  JsonData buildFailed(int code, String message){
+
+    public static JsonData buildFailed(int code, String message) {
         return new JsonData(code, message);
     }
 }

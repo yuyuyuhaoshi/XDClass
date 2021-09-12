@@ -1,19 +1,37 @@
 package net.xdclass.demoproject.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import net.xdclass.demoproject.domain.Chapter;
+
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class Video implements Serializable {
     private int id;
     private String title;
     private String summary;
     private int price;
+
+    @JsonProperty("cover_image")
     private String coverImage;
+
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", locale = "zh", timezone = "GMT+8")
     private Date tdate;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonProperty("chapter_list")
+    private List<Chapter> chapterList;
+
+    public Video() {
+    }
 
     public Video(int id, String title) {
         this.id = id;
         this.title = title;
+        this.tdate = new Date();
     }
 
     public Video(int id, String title, String summary, int price, String coverImage) {
@@ -73,6 +91,14 @@ public class Video implements Serializable {
         this.tdate = tdate;
     }
 
+    public List<Chapter> getChapterList() {
+        return chapterList;
+    }
+
+    public void setChapterList(List<Chapter> chapterList) {
+        this.chapterList = chapterList;
+    }
+
     @Override
     public String toString() {
         return "Video{" +
@@ -82,6 +108,7 @@ public class Video implements Serializable {
                 ", price=" + price +
                 ", coverImage='" + coverImage + '\'' +
                 ", tdate=" + tdate +
+                ", chapterList=" + chapterList +
                 '}';
     }
 }

@@ -3,7 +3,9 @@ package net.xdclass.demoproject.mapper;
 import net.xdclass.demoproject.domain.User;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Repository
@@ -16,15 +18,21 @@ public class UserMapper {
         userMap.put("jerry", new User(3, "jerry", "123"));
     }
 
-    public  User login(String username, String password){
+    public User login(String username, String password) {
         User user = userMap.get(username);
-        if(user == null) {
+        if (user == null) {
             return null;
         }
 
-        if (user.getPassword().equals(password)){
+        if (user.getPassword().equals(password)) {
             return user;
         }
         return null;
+    }
+
+    public List<User> userList() {
+        List<User> list = new ArrayList<>();
+        list.addAll(userMap.values());
+        return list;
     }
 }
