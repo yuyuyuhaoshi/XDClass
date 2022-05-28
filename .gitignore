@@ -1,8 +1,11 @@
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**
-!**/src/test/**
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### logs ###
+logs
 
 ### STS ###
 .apt_generated
@@ -26,6 +29,11 @@ target/
 /nbdist/
 /.nb-gradle/
 build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### MacOS Cache File ###
+.DS_Store
 
 ### VS Code ###
 .vscode/
