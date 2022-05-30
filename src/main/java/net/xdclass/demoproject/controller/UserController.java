@@ -10,17 +10,17 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("api/v1/pub/user")
 public class UserController {
 
-    @Autowired
-    public UserService userService;
+  @Autowired public UserService userService;
 
-    @PostMapping("login")
-    public JsonData login(@RequestBody User user) {
-        String token = userService.login(user.getUsername(), user.getPassword());
-        return token != null ? JsonData.buildSuccess(token) : JsonData.buildFailed(401, "用户名密码不正确");
-    }
+  @PostMapping("login")
+  public JsonData login(@RequestBody User user) {
+    System.out.println(user.toString());
+    String token = userService.login(user.getUsername(), user.getPassword());
+    return token != null ? JsonData.buildSuccess(token) : JsonData.buildFailed(401, "用户名密码不正确");
+  }
 
-    @GetMapping("list")
-    public JsonData userList(){
-        return JsonData.buildSuccess(userService.userList());
-    }
+  @GetMapping("list")
+  public JsonData userList() {
+    return JsonData.buildSuccess(userService.userList());
+  }
 }

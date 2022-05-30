@@ -6,109 +6,121 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import net.xdclass.demoproject.domain.Chapter;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class Video implements Serializable {
-    private int id;
-    private String title;
-    private String summary;
-    private int price;
+  private int id;
+  private String title;
+  private String summary;
+  private int price;
 
-    @JsonProperty("cover_image")
-    private String coverImage;
 
-    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", locale = "zh", timezone = "GMT+8")
-    private Date tdate;
+  @JsonProperty("cover_image")
+  private String coverImage;
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonProperty("chapter_list")
-    private List<Chapter> chapterList;
+  @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", locale = "zh", timezone = "GMT+8")
+  private Date tdate;
 
-    public Video() {
-    }
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  @JsonProperty("chapter_list")
+  private List<Chapter> chapterList;
 
-    public Video(int id, String title) {
-        this.id = id;
-        this.title = title;
-        this.tdate = new Date();
-    }
+  public Video() {}
 
-    public Video(int id, String title, String summary, int price, String coverImage) {
-        this.id = id;
-        this.title = title;
-        this.summary = summary;
-        this.price = price;
-        this.coverImage = coverImage;
-        this.tdate = new Date();
-    }
+  public Video(int id, String title) {
+    this.id = id;
+    this.title = title;
+    this.tdate = new Date();
+  }
 
-    public int getId() {
-        return id;
-    }
+  public Video(int id, String title, String summary, int price, String coverImage) {
+    this.id = id;
+    this.title = title;
+    this.summary = summary;
+    this.price = price;
+    this.coverImage = coverImage;
+    this.tdate = new Date();
+    this.chapterList = new ArrayList<>();
+  }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+  public int getId() {
+    return id;
+  }
 
-    public String getTitle() {
-        return title;
-    }
+  public void setId(int id) {
+    this.id = id;
+  }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+  public String getTitle() {
+    return title;
+  }
 
-    public String getSummary() {
-        return summary;
-    }
+  public void setTitle(String title) {
+    this.title = title;
+  }
 
-    public void setSummary(String summary) {
-        this.summary = summary;
-    }
+  public String getSummary() {
+    return summary;
+  }
 
-    public int getPrice() {
-        return price;
-    }
+  public void setSummary(String summary) {
+    this.summary = summary;
+  }
 
-    public void setPrice(int price) {
-        this.price = price;
-    }
+  public int getPrice() {
+    return price;
+  }
 
-    public String getCoverImage() {
-        return coverImage;
-    }
+  public void setPrice(int price) {
+    this.price = price;
+  }
 
-    public void setCoverImage(String coverImage) {
-        this.coverImage = coverImage;
-    }
+  public String getCoverImage() {
+    return coverImage;
+  }
 
-    public Date getTdate() {
-        return tdate;
-    }
+  public void setCoverImage(String coverImage) {
+    this.coverImage = coverImage;
+  }
 
-    public void setTdate(Date tdate) {
-        this.tdate = tdate;
-    }
+  public Date getTdate() {
+    return tdate;
+  }
 
-    public List<Chapter> getChapterList() {
-        return chapterList;
-    }
+  public void setTdate(Date tdate) {
+    this.tdate = tdate;
+  }
 
-    public void setChapterList(List<Chapter> chapterList) {
-        this.chapterList = chapterList;
-    }
+  public List<Chapter> getChapterList() {
+    return chapterList;
+  }
 
-    @Override
-    public String toString() {
-        return "Video{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", summary='" + summary + '\'' +
-                ", price=" + price +
-                ", coverImage='" + coverImage + '\'' +
-                ", tdate=" + tdate +
-                ", chapterList=" + chapterList +
-                '}';
-    }
+  public void setChapterList(List<Chapter> chapterList) {
+    this.chapterList = chapterList;
+  }
+
+  @Override
+  public String toString() {
+    return "Video{"
+        + "id="
+        + id
+        + ", title='"
+        + title
+        + '\''
+        + ", summary='"
+        + summary
+        + '\''
+        + ", price="
+        + price
+        + ", coverImage='"
+        + coverImage
+        + '\''
+        + ", tdate="
+        + tdate
+        + ", chapterList="
+        + chapterList
+        + '}';
+  }
 }

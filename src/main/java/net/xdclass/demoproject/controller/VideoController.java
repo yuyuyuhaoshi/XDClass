@@ -13,10 +13,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * 视频控制器
- */
-
 
 @RestController
 @RequestMapping("/api/v1/pub/video")
