@@ -1,0 +1,5 @@
+wechat:
+  pay:
+    appid: 12345678
+    secret: qwer
+    merchant: asdf

@@ -13,6 +13,9 @@ public class User implements Serializable {
   @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
   private String password;
 
+  public User() {
+  }
+
   public User(int id, String username, String password) {
     this.id = id;
     this.username = username;

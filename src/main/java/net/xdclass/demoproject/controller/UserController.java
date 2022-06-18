@@ -14,7 +14,6 @@ public class UserController {
 
   @PostMapping("login")
   public JsonData login(@RequestBody User user) {
-    System.out.println(user.toString());
     String token = userService.login(user.getUsername(), user.getPassword());
     return token != null ? JsonData.buildSuccess(token) : JsonData.buildFailed(401, "用户名密码不正确");
   }
