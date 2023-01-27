@@ -3,6 +3,10 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+    <settings>
+        <!--下划线映射驼峰-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"/>
@@ -11,7 +15,7 @@
                 <property name="url"
                           value="jdbc:mysql://127.0.0.1:3306/xdclass?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false"/>
                 <property name="username" value="root"/>
-                <property name="password" value="xdclass.net"/>
+<!--                <property name="password" value="xdclass"/>-->
             </dataSource>
         </environment>
     </environments>

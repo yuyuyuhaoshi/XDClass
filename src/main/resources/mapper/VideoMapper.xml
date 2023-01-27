@@ -2,9 +2,12 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="">
-    <select id="selectById"
-            resultType="net.xdclass.online_class.domain.Video">
-        select * from video where id = #{video_id}
+<mapper namespace="net.xdclass.project.dao.VideoMapper">
+    <select id="selectById" parameterType="int"  resultType="net.xdclass.project.domain.Video">
+        select * from video where id = #{id}
+    </select>
+    
+    <select id="selectListByPriceAndName" resultType="net.xdclass.project.domain.Video">
+        select * from video where price = #{price} and name like concat("%", #{name}, "%")
     </select>
 </mapper>
