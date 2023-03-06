@@ -12,8 +12,8 @@ public interface VideoMapper {
     @Select("select * from video;")
     List<Video> selectList();
 
-
     List<Video> selectListByPriceAndName(@Param("price") double price, @Param("name")  String name);
 
+    int insert(Video video);
 
 }

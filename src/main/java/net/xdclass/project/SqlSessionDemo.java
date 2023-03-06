@@ -23,7 +23,7 @@ public class SqlSessionDemo {
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 
         //获取Session
-        try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
+        try (SqlSession sqlSession = sqlSessionFactory.openSession(true)) {
 
             VideoMapper videoMapper = sqlSession.getMapper(VideoMapper.class);
 
@@ -35,10 +35,20 @@ public class SqlSessionDemo {
 
             System.out.println(videoList.toString());
 
-            List<Video> video1 = videoMapper.selectListByPriceAndName(1, "2");
-            System.out.println(video1);
+            Video video2 = new Video();
+            video2.setName("Video4");
+            video2.setSummary("Summary4");
+            video2.setCoverImage("CoverImage4");
+            video2.setPrice(4.0F);
+            int rows = videoMapper.insert(video2);
+            System.out.println(rows);
+            System.out.println(video2);
+            sqlSession.commit();
 
+
+        } catch (Exception e) {
+            System.out.println(e);
+            throw e;
         }
-
     }
 }

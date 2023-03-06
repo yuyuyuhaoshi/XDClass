@@ -15,7 +15,7 @@ public class Video implements Serializable {
   private boolean isDeleted;
   private String name;
   private String summary;
-  private int price;
+  private float price;
   @JsonProperty("cover_image")
   private String coverImage;
   @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", locale = "zh", timezone = "GMT+8")
@@ -28,7 +28,7 @@ public class Video implements Serializable {
   @JsonProperty("chapter_list")
   private List<Chapter> chapterList;
 
-  public Video(int id, boolean isDeleted, String name, String summary, int price, String coverImage, Date tDate, Date uDate) {
+  public Video(int id, boolean isDeleted, String name, String summary, float price, String coverImage, Date tDate, Date uDate) {
     this.id = id;
     this.isDeleted = isDeleted;
     this.name = name;
@@ -82,11 +82,11 @@ public class Video implements Serializable {
     this.summary = summary;
   }
 
-  public int getPrice() {
+  public double getPrice() {
     return price;
   }
 
-  public void setPrice(int price) {
+  public void setPrice(float price) {
     this.price = price;
   }
 
