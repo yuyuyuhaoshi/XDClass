@@ -3,16 +3,61 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="net.xdclass.project.dao.VideoMapper">
-    <select id="selectById" parameterType="java.lang.Integer"  resultType="net.xdclass.project.domain.Video">
+    <sql id="video_field">
+        id, tdate, udate, is_deleted, name, summary, cover_image, price
+    </sql>
+    <select id="selectById" parameterType="java.lang.Integer"  resultType="Video">
         select * from video where id = #{id}
     </select>
     
-    <select id="selectListByPriceAndName" resultType="net.xdclass.project.domain.Video">
-        select * from video where price = #{price,jdbcType=DOUBLE} and name like concat("%", #{name,jdbcType=VARCHAR}, "%")
+    <select id="selectListByPriceAndName" resultType="Video">
+        select <include refid="video_field" /> from video where price = #{price,jdbcType=DOUBLE} and name like concat("%", #{name,jdbcType=VARCHAR}, "%")
     </select>
 
-    <insert id="insert" parameterType="net.xdclass.project.domain.Video" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+    <insert id="insert" parameterType="Video" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         INSERT INTO `video` (name, summary, cover_image, price)
         VALUES (#{name,jdbcType=VARCHAR}, #{summary,jdbcType=VARCHAR}, #{coverImage,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE});
     </insert>
+    
+    <insert id="batchInsert" parameterType="Video">
+        INSERT INTO `video` (name, summary, cover_image, price)
+        VALUES
+        <foreach collection="list" item="video" separator=",">
+            (#{video.name,jdbcType=VARCHAR}, #{video.summary,jdbcType=VARCHAR}, #{video.coverImage,jdbcType=VARCHAR}, #{video.price,jdbcType=DOUBLE})
+        </foreach>
+        ;
+    </insert>
+
+    <update id="update" parameterType="Video">
+        update video
+        <trim prefix="set" suffixOverrides=",">
+            <if test="name != '' and name != null">name = #{name,jdbcType=VARCHAR},</if>
+            <if test="summary != '' and summary != null">summary = #{summary,jdbcType=VARCHAR},</if>
+            <if test="coverImage != '' and coverImage != null">cover_image = #{coverImage,jdbcType=VARCHAR},</if>
+            <if test="price != null and price != 0">price = #{price,jdbcType=DOUBLE},</if>
+
+        </trim>
+        where id = #{id}
+    </update>
+    <!-- <![CDATA[ > ]] 大于符号转义-->
+    
+    <resultMap id="VideoResultMap" type="Video">
+        <!-- id 指定查询列的唯一标识-->
+        <!-- column 数据库字段的名称-->
+        <!-- property pojo的属性名称-->
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="summary" property="summary" jdbcType="VARCHAR" />
+        <result column="price" property="price" jdbcType="DOUBLE" />
+        <result column="cover_image" property="coverImage" jdbcType="VARCHAR" />
+        <result column="tdate" property="tDate" />
+        <result column="udate" property="uDate" />
+
+    </resultMap>
+
+    <select id="selectResultMapById" resultMap="VideoResultMap">
+        select id, name, tdate as id, name, tdate from video where id = #{id}
+    </select>
+    
+    
 </mapper>

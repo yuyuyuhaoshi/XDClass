@@ -12,10 +12,10 @@ import java.util.List;
 public class Video implements Serializable {
   private int id;
 
-  private boolean isDeleted;
+  private Boolean isDeleted;
   private String name;
   private String summary;
-  private float price;
+  private Double price;
   @JsonProperty("cover_image")
   private String coverImage;
   @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", locale = "zh", timezone = "GMT+8")
@@ -28,7 +28,7 @@ public class Video implements Serializable {
   @JsonProperty("chapter_list")
   private List<Chapter> chapterList;
 
-  public Video(int id, boolean isDeleted, String name, String summary, float price, String coverImage, Date tDate, Date uDate) {
+  public Video(int id, Boolean isDeleted, String name, String summary, Double price, String coverImage, Date tDate, Date uDate) {
     this.id = id;
     this.isDeleted = isDeleted;
     this.name = name;
@@ -48,7 +48,7 @@ public class Video implements Serializable {
     this.tDate = new Date();
   }
 
-  public Video(int id, String title, String summary, int price, String coverImage) {
+  public Video(int id, String title, String summary, Double price, String coverImage) {
     this.id = id;
     this.name = title;
     this.summary = summary;
@@ -82,11 +82,11 @@ public class Video implements Serializable {
     this.summary = summary;
   }
 
-  public double getPrice() {
+  public Double getPrice() {
     return price;
   }
 
-  public void setPrice(float price) {
+  public void setPrice(Double price) {
     this.price = price;
   }
 
@@ -106,11 +106,11 @@ public class Video implements Serializable {
     this.tDate = tdate;
   }
 
-  public boolean isDeleted() {
+  public Boolean isDeleted() {
     return isDeleted;
   }
 
-  public void setDeleted(boolean deleted) {
+  public void setDeleted(Boolean deleted) {
     isDeleted = deleted;
   }
 

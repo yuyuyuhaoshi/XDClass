@@ -16,4 +16,10 @@ public interface VideoMapper {
 
     int insert(Video video);
 
+    int batchInsert(List<Video> list);
+
+    int update(Video video);
+
+    Video selectResultMapById(@Param("id") int videoId);
+
 }

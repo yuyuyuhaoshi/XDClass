@@ -7,6 +7,12 @@
         <!--下划线映射驼峰-->
         <setting name="mapUnderscoreToCamelCase" value="true"/>
     </settings>
+
+    <typeAliases>
+        <!-- <typeAlias type="net.xdclass.project.domain.Video" alias="Video"></typeAlias>-->
+        <package name="net.xdclass.project.domain"/>
+    </typeAliases>
+
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"/>
@@ -15,11 +21,12 @@
                 <property name="url"
                           value="jdbc:mysql://127.0.0.1:3306/xdclass?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false"/>
                 <property name="username" value="root"/>
-<!--                <property name="password" value="xdclass"/>-->
+                <!--  <property name="password" value="xdclass"/>-->
             </dataSource>
         </environment>
     </environments>
     <mappers>
         <mapper resource="mapper/VideoMapper.xml"/>
+        <mapper resource="mapper/VideoOrderMapper.xml"/>
     </mappers>
 </configuration>
