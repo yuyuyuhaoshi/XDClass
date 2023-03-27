@@ -1,60 +1,107 @@
 package net.xdclass.project.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class User implements Serializable {
-  private int id;
-  private String username;
-//  @JsonIgnore
-  @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-  private String password;
+    private int id;
 
-  public User() {
-  }
+    private Boolean isDeleted;
 
-  public User(int id, String username, String password) {
-    this.id = id;
-    this.username = username;
-    this.password = password;
-  }
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", locale = "zh", timezone = "GMT+8")
+    private Date tDate;
 
-  public int getId() {
-    return id;
-  }
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", locale = "zh", timezone = "GMT+8")
+    private Date uDate;
 
-  public void setId(int id) {
-    this.id = id;
-  }
+    private String username;
+    //  @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private String password;
 
-  public String getUsername() {
-    return username;
-  }
+    private String phone;
 
-  public void setUsername(String username) {
-    this.username = username;
-  }
+    public User() {
+    }
 
-  public String getPassword() {
-    return password;
-  }
+    public User(int id, String username, String password) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+    }
 
-  public void setPassword(String password) {
-    this.password = password;
-  }
+    public User(int id, String username, String password, String phone) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.phone = phone;
+    }
 
-  @Override
-  public String toString() {
-    return "User{"
-        + "id="
-        + id
-        + ", username='"
-        + username
-        + '\''
-        + ", password='"
-        + password
-        + '\''
-        + '}';
-  }
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public Boolean getDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        isDeleted = deleted;
+    }
+
+    public Date getTDate() {
+        return tDate;
+    }
+
+    public void setTDate(Date tDate) {
+        this.tDate = tDate;
+    }
+
+    public Date getUDate() {
+        return uDate;
+    }
+
+    public void setUDate(Date uDate) {
+        this.uDate = uDate;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", phone='" + phone + '\'' +
+                '}';
+    }
 }

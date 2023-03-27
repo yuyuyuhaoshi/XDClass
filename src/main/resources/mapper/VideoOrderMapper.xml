@@ -15,6 +15,29 @@
         <result column="tdate" property="tDate" />
         <result column="udate" property="uDate" />
         <result column="is_deleted" property="uDate" />
+
+        <association property="user" javaType="User">
+            <id column="user_id" property="id" jdbcType="INTEGER" />
+            <result column="username" property="username" jdbcType="VARCHAR"/>
+            <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        </association>
     </resultMap>
+
+    <select id="queryList" resultMap="VideoOrderResultMap" >
+        select
+            o.id id,
+            o.user_id user_id,
+            o.trade_number trade_number,
+            o.status status,
+            o.price price,
+            o.tdate tdate,
+            o.udate udate,
+            o.is_deleted,
+            u.id user_id,
+            u.username username,
+            u.phone phone
+
+        from video_order o left join user u on o.user_id = u.id;
+    </select>
     
 </mapper>
