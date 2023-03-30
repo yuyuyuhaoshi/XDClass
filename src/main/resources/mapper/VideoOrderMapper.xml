@@ -14,15 +14,20 @@
 
         <result column="tdate" property="tDate" />
         <result column="udate" property="uDate" />
-        <result column="is_deleted" property="uDate" />
+        <result column="is_deleted" property="isDeleted" />
 
         <association property="user" javaType="User">
+            <!--
+            association 配置属性 1对1
+
+            -->
             <id column="user_id" property="id" jdbcType="INTEGER" />
             <result column="username" property="username" jdbcType="VARCHAR"/>
             <result column="phone" property="phone" jdbcType="VARCHAR"/>
         </association>
     </resultMap>
 
+    <!-- 订单查询 订单内部包含用户属性 -->
     <select id="queryList" resultMap="VideoOrderResultMap" >
         select
             o.id id,
@@ -32,12 +37,12 @@
             o.price price,
             o.tdate tdate,
             o.udate udate,
-            o.is_deleted,
+            o.is_deleted is_deleted,
             u.id user_id,
             u.username username,
             u.phone phone
 
         from video_order o left join user u on o.user_id = u.id;
     </select>
-    
+
 </mapper>
