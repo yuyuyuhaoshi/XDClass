@@ -2,6 +2,7 @@ package net.xdclass.project;
 
 import net.xdclass.project.dao.VideoMapper;
 import net.xdclass.project.dao.VideoOrderMapper;
+import net.xdclass.project.domain.User;
 import net.xdclass.project.domain.Video;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -31,7 +32,11 @@ public class SqlSessionDemo {
             VideoOrderMapper videoOrderMapper = sqlSession.getMapper(VideoOrderMapper.class);
 
             System.out.println(videoMapper.selectResultMapById(1));
-            System.out.println( videoOrderMapper.queryList());
+            System.out.println( videoOrderMapper.queryOrders());
+            List<User> users = videoOrderMapper.queryUserOrders();
+            System.out.println(users);
+
+            System.out.println(1 == 1);
 
 
         }

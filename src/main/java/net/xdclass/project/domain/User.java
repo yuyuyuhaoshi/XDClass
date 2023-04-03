@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class User implements Serializable {
     private int id;
@@ -23,6 +24,8 @@ public class User implements Serializable {
     private String password;
 
     private String phone;
+
+    private List<VideoOrder> videoOrderList;
 
     public User() {
     }
@@ -94,6 +97,14 @@ public class User implements Serializable {
 
     public void setUDate(Date uDate) {
         this.uDate = uDate;
+    }
+
+    public List<VideoOrder> getVideoOrderList() {
+        return videoOrderList;
+    }
+
+    public void setVideoOrderList(List<VideoOrder> videoOrderList) {
+        this.videoOrderList = videoOrderList;
     }
 
     @Override

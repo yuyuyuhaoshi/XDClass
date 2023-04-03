@@ -4,45 +4,83 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="net.xdclass.project.dao.VideoOrderMapper">
     <resultMap id="VideoOrderResultMap" type="VideoOrder">
-        <id column="id" property="id" jdbcType="INTEGER" />
-
+        <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="video_id" property="videoId" jdbcType="INTEGER"/>
         <result column="user_id" property="userId" jdbcType="INTEGER"/>
         <result column="trade_number" property="tradeNumber" jdbcType="VARCHAR"/>
-        <result column="status" property="status" jdbcType="INTEGER" />
-        <result column="price" property="price" jdbcType="DOUBLE" />
-
-        <result column="tdate" property="tDate" />
-        <result column="udate" property="uDate" />
-        <result column="is_deleted" property="isDeleted" />
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="price" property="price" jdbcType="DOUBLE"/>
+        <result column="tdate" property="tDate"/>
+        <result column="udate" property="uDate"/>
+        <result column="is_deleted" property="isDeleted"/>
 
         <association property="user" javaType="User">
             <!--
             association 配置属性 1对1
-
             -->
-            <id column="user_id" property="id" jdbcType="INTEGER" />
+            <id column="user_id" property="id" jdbcType="INTEGER"/>
             <result column="username" property="username" jdbcType="VARCHAR"/>
             <result column="phone" property="phone" jdbcType="VARCHAR"/>
         </association>
     </resultMap>
 
     <!-- 订单查询 订单内部包含用户属性 -->
-    <select id="queryList" resultMap="VideoOrderResultMap" >
-        select
-            o.id id,
-            o.user_id user_id,
-            o.trade_number trade_number,
-            o.status status,
-            o.price price,
-            o.tdate tdate,
-            o.udate udate,
-            o.is_deleted is_deleted,
-            u.id user_id,
-            u.username username,
-            u.phone phone
+    <select id="queryOrders" resultMap="VideoOrderResultMap">
+        select o.id           id,
+               o.user_id      user_id,
+               o.trade_number trade_number,
+               o.status       status,
+               o.price        price,
+               o.tdate        tdate,
+               o.udate        udate,
+               o.is_deleted   is_deleted,
+               u.id           user_id,
+               u.username     username,
+               u.phone        phone
+        from video_order o
+                 left join user u on o.user_id = u.id;
+    </select>
 
-        from video_order o left join user u on o.user_id = u.id;
+    <resultMap id="userOrdersResultMap" type="User">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <collection property="videoOrderList" ofType="VideoOrder">
+            <!--
+           collection 配置属性 1对多
+           property pojo类中的属性名
+           ofType pojo类中的属性的类名
+           -->
+            <id column="order_id" property="id" jdbcType="INTEGER"/>
+
+            <result column="video_id" property="videoId" jdbcType="INTEGER"/>
+            <result column="user_id" property="userId" jdbcType="INTEGER"/>
+            <result column="trade_number" property="tradeNumber" jdbcType="VARCHAR"/>
+            <result column="status" property="status" jdbcType="INTEGER"/>
+            <result column="price" property="price" jdbcType="DOUBLE"/>
+
+            <result column="tdate" property="tDate"/>
+            <result column="udate" property="uDate"/>
+            <result column="is_deleted" property="isDeleted"/>
+        </collection>
+
+    </resultMap>
+
+    <select id="queryUserOrders" resultMap="userOrdersResultMap">
+        select u.id           id,
+               u.username     username,
+               u.phone        phone,
+               o.id           order_id,
+               o.user_id      user_id,
+               o.trade_number trade_number,
+               o.status       status,
+               o.price        price,
+               o.tdate        tdate,
+               o.udate        udate,
+               o.is_deleted   is_deleted
+
+        from user u
+                 left join video_order o on u.id = o.user_id;
     </select>
 
 </mapper>
