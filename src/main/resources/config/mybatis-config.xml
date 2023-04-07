@@ -4,8 +4,13 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <settings>
-        <!--下划线映射驼峰-->
         <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!--测试二级缓存开关-->
+        <setting name="cacheEnabled" value="true" />
+        <!--懒加载开关-->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <!--false表示按需加载-->
+        <setting name="aggressiveLazyLoading" value="false"/>
     </settings>
 
     <typeAliases>

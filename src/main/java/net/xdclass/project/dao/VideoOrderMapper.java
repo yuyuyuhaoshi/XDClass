@@ -8,4 +8,5 @@ import java.util.List;
 public interface VideoOrderMapper {
     List<VideoOrder> queryOrders();
     List<User> queryUserOrders();
+    List<VideoOrder> queryOrdersLazy();
 }

@@ -42,15 +42,15 @@ public class Video implements Serializable {
 
   public Video() {}
 
-  public Video(int id, String title) {
+  public Video(int id, String name) {
     this.id = id;
-    this.name = title;
+    this.name = name;
     this.tDate = new Date();
   }
 
-  public Video(int id, String title, String summary, Double price, String coverImage) {
+  public Video(int id, String name, String summary, Double price, String coverImage) {
     this.id = id;
-    this.name = title;
+    this.name = name;
     this.summary = summary;
     this.price = price;
     this.coverImage = coverImage;
@@ -136,7 +136,7 @@ public class Video implements Serializable {
     return "Video{"
         + "id="
         + id
-        + ", title='"
+        + ", name='"
         + name
         + '\''
         + ", summary='"

@@ -2,9 +2,6 @@ package net.xdclass.project;
 
 import net.xdclass.project.dao.VideoMapper;
 import net.xdclass.project.dao.VideoOrderMapper;
-import net.xdclass.project.domain.User;
-import net.xdclass.project.domain.Video;
-import net.xdclass.project.domain.VideoOrder;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -12,10 +9,8 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 
-public class SqlSessionDemo {
+public class SqlSessionCacheDemo {
     public static void main(String[] args) throws IOException {
 
         String resouce = "config/mybatis-config.xml";
@@ -26,26 +21,27 @@ public class SqlSessionDemo {
         //构建Session⼯⼚
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 
-        //获取Session
-        try (SqlSession sqlSession = sqlSessionFactory.openSession(true)) {
+        try {
+            // 测试二级缓存
+            SqlSession sqlSession1 = sqlSessionFactory.openSession(true);
+            VideoMapper videoMapper = sqlSession1.getMapper(VideoMapper.class);
+            System.out.println(videoMapper.selectResultMapById(1));
+            sqlSession1.commit();
 
-            VideoMapper videoMapper = sqlSession.getMapper(VideoMapper.class);
-            VideoOrderMapper videoOrderMapper = sqlSession.getMapper(VideoOrderMapper.class);
 
-
+            SqlSession sqlSession2 = sqlSessionFactory.openSession(true);
+            VideoMapper videoMapper2 = sqlSession2.getMapper(VideoMapper.class);
+            System.out.println(videoMapper2.selectResultMapById(1));
+            sqlSession1.commit();
 //            System.out.println( videoOrderMapper.queryOrders());
 //            List<User> users = videoOrderMapper.queryUserOrders();
 //            System.out.println(users);
 //
 //            System.out.println(1 == 1);
 
-//            System.out.println( videoOrderMapper.queryOrdersLazy());
-            for (VideoOrder videoOrder: videoOrderMapper.queryOrdersLazy()){
-                System.out.println(videoOrder.getVideoId());
-//                System.out.println(videoOrder);
-            }
 
-
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

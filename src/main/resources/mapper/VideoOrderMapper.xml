@@ -83,4 +83,35 @@
                  left join video_order o on u.id = o.user_id;
     </select>
 
+    <resultMap id="VideoOrderLazyResultMap" type="VideoOrder">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="video_id" property="videoId" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="trade_number" property="tradeNumber" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="price" property="price" jdbcType="DOUBLE"/>
+        <result column="tdate" property="tDate"/>
+        <result column="udate" property="uDate"/>
+        <result column="is_deleted" property="isDeleted"/>
+
+        <association property="user" javaType="User" select="selectUserById" column="user_id" />
+    </resultMap>
+
+    <!-- 订单懒加载查询 订单内部包含用户属性 -->
+    <select id="queryOrdersLazy" resultMap="VideoOrderLazyResultMap">
+        select o.id           id,
+               o.user_id      user_id,
+               o.trade_number trade_number,
+               o.status       status,
+               o.price        price,
+               o.tdate        tdate,
+               o.udate        udate,
+               o.is_deleted   is_deleted
+        from video_order o
+    </select>
+
+    <select id="selectUserById" resultType="User">
+        select * from user where id=#{id}
+    </select>
+
 </mapper>

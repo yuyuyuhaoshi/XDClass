@@ -6,6 +6,7 @@
     <sql id="video_field">
         id, tdate, udate, is_deleted, name, summary, cover_image, price
     </sql>
+    <!-- useCache false 使二级缓存失效-->
     <select id="selectById" parameterType="java.lang.Integer"  resultType="Video">
         select * from video where id = #{id}
     </select>
@@ -55,9 +56,10 @@
 
     </resultMap>
 
-    <select id="selectResultMapById" resultMap="VideoResultMap">
+    <!--二级缓存-->
+    <cache eviction="LRU" flushInterval="100000" readOnly="true" size="1024" />
+    <select id="selectResultMapById" resultMap="VideoResultMap" useCache="false">
         select id, name, tdate as id, name, tdate from video where id = #{id}
     </select>
-    
-    
+
 </mapper>
