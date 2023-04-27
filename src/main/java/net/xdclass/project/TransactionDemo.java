@@ -22,18 +22,24 @@ public class TransactionDemo {
 
         //构建Session⼯⼚
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-        SqlSession sqlSession = sqlSessionFactory.openSession();
+        SqlSession sqlSession = sqlSessionFactory.openSession(true);
 
         //获取Session
         try {
             VideoMapper videoMapper = sqlSession.getMapper(VideoMapper.class);
             Video video = new Video();
-            
-
+            video.setName("Video8");
+            video.setSummary("Summary8");
+            video.setCoverImage("CoverImage8");
+            video.setPrice(8.0);
+            videoMapper.insert(video);
+//            sqlSession.commit();
 
 
         } catch (Exception e) {
             e.printStackTrace();
+            sqlSession.rollback();
         }
+        sqlSession.close();
     }
 }
